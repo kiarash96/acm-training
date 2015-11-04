@@ -8,15 +8,14 @@ LANG: C++
 #include <fstream>
 using namespace std;
 
-#define cin fin
-#define cout fout
+//#define cin fin
+//#define cout fout
 
 int main() {
 	ios::sync_with_stdio(0);
 
 	ifstream fin("test.in");
 	ofstream fout("test.out");
-
 
 
 	return 0;
