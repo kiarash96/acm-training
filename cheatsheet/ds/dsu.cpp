@@ -10,7 +10,7 @@ const int MaxN = 100;
 int dsu[MaxN];
 int size[MaxN];
 
-inline int find(int x) { return (x != dsu[x] ? dsu[x] = find(dsu[x]) : dsu[x]); }
+inline int find(int x) { return (x == dsu[x] ? dsu[x] : dsu[x] = find(dsu[x])); }
 
 inline void join(int x, int y) {
 	x = find(x), y = find(y);

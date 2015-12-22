@@ -1,5 +1,6 @@
 /*
- * Topological sort with Tarjan's algorithm
+ * Topological sort with Tarjan's algorithm (Reverse post-order)
+ * Running time: O(|V| + |E|)
  */
 
 #include <iostream>
@@ -9,21 +10,20 @@ using namespace std;
 
 #define pb push_back
 
-const int MaxN = 100;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
 
 int N, E;
-vector<int> list[MaxN];
+vvi list;
 
-bool mark[MaxN] = {0};
+vector<bool> mark;
 stack<int> order;
 
 inline void DFS(int v) {
 	mark[v] = true;
-	for (int i = 0; i < (int) list[v].size(); i ++) {
-		int u = list[v][i];
+	for (int u : list[v])
 		if (!mark[u])
 			DFS(u);
-	}
 	order.push(v);
 }
 
@@ -31,6 +31,7 @@ int main() {
 	ios::sync_with_stdio(0);
 
 	cin >> N >> E;
+	list.resize(N);
 	for (int i = 0; i < E; i ++) {
 		int u, v;
 		cin >> u >> v;
@@ -39,12 +40,13 @@ int main() {
 		list[u].pb(v);
 	}
 
+	mark.resize(N, false);
 	for (int i = 0; i < N; i ++)
 		if (!mark[i])
 			DFS(i);
 
 	for (int i = 0; i < N; i ++) {
-		cout << (i == 0 ? "" : " ") << order.top() + 1;
+		cout << order.top() + 1 << " ";
 		order.pop();
 	}
 	cout << endl;

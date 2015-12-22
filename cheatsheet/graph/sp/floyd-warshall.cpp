@@ -1,5 +1,6 @@
 /*
  * Floyd-Warshall all-pairs shortest path algorithm
+ * Running time: O(|V|^3)
  */
 
 #include <iostream>
