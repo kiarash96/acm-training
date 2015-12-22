@@ -7,20 +7,18 @@ using namespace std;
 
 const int MaxN = 100;
 
-int par[MaxN];
+int dsu[MaxN];
 int size[MaxN];
 
-inline int find(int x) {
-	if (x != par[x])
-		par[x] = find(par[x]);
-	return par[x];
-}
+inline int find(int x) { return (x != dsu[x] ? dsu[x] = find(dsu[x]) : dsu[x]); }
 
 inline void join(int x, int y) {
 	x = find(x), y = find(y);
+	if (x == y)
+		return;
 	if (size[x] > size[y])
 		swap(x, y);
-	par[x] = y;
+	dsu[x] = y;
 	size[y] += size[x];
 }
 
@@ -32,7 +30,7 @@ int main() {
 	cin >> N;
 
 	for (int i = 0; i < N; i ++) {
-		par[i] = i;
+		dsu[i] = i;
 		size[i] = 1;
 	}
 
