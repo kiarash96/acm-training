@@ -1,3 +1,8 @@
+/*
+ * Dijkstra single source shortest path algorithm.
+ * Running time: O(nlogn)
+ */
+
 #include <iostream>
 #include <vector>
 #include <set>
@@ -7,15 +12,14 @@ using namespace std;
 #define eb emplace_back
 #define mp make_pair
 
-typedef long long ll;
 typedef pair<int, int> pii;
 
-const int MaxN = 100 * 1000;
-const ll INF = 1000 * 1000 * 1000 * 1000ll;
+const int MaxN = 1000;
+const int INF = 1000 * 1000 * 1000;
 
 int N, E;
 vector<pii> list[MaxN];
-ll dist[MaxN];
+int dist[MaxN];
 int par[MaxN];
 
 set<pii> S;
@@ -61,18 +65,11 @@ int main() {
 		list[v].eb(u, w);
 	}
 
-	dijkstra(0);
+	int src;
+	cin >> src;
+	src --;
 
-	if (par[N - 1] == -2)
-		cout << -1 << endl;
-	else {
-		vector<int> path;
-		for (int v = N - 1; v != -1; v = par[v])
-			path.pb(v);
-		for (int i = (int) path.size() - 1; i >= 0; i --)
-			cout << path[i] + 1 << " ";
-		cout << endl;
-	}
+	dijkstra(src);
 
 	return 0;
 }

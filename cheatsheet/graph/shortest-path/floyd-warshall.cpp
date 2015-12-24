@@ -11,7 +11,7 @@ using namespace std;
 
 typedef pair<int, int> pii;
 
-const int MaxN = 100;
+const int MaxN = 1000;
 const int INF = 1e9;
 
 int N, E;
@@ -23,9 +23,9 @@ inline void floyd_warshall() {
 		for (int u = 0; u < N; u ++)
 			sp[v][u] = INF;
 	for (int v = 0; v < N; v ++) {
+		for (pii edge : list[v])
+			sp[v][edge.first] = edge.second;
 		sp[v][v] = 0;
-		for (int i = 0; i < (int) list[v].size(); i ++)
-			sp[v][list[v][i].first] = list[v][i].second;
 	}
 
 	for (int k = 0; k < N; k ++)
